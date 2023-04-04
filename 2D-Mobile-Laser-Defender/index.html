@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Canvas mit Touch</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        #canvas01 {
+            background-color: rgb(0, 162, 255);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas01" >Kein Canvas.</canvas>
+    <script type="module" src='main.mjs'></script>
+    <!-- <script>
+
+    const canvas = document.getElementById("canvas01");
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    addEventListener("resize", resize);
+
+    const startAngle = 0;
+    const endAngle = Math.PI * 2;
+
+        class Player
+        {
+            constructor(x,y,r)
+            {
+                this.x = x;
+                this.y = y;
+                this.r = r;
+                this.v=
+                {
+                    x:7,y:7
+                }
+            }
+
+            playerDrawPath()
+            {
+                ctx.arc(this.x,this.y,this.r,startAngle,endAngle);
+                ctx.fill();
+            }
+
+            playerMove()
+            {
+                if(joyStick.pressed)
+                {
+                    this.x-=this.v.x*joyStick.dx;
+                    this.y-=this.v.y*joyStick.dy;
+                }
+
+            }
+        }
+
+        class JoyStick
+        {
+            constructor(x,y,r){
+                //inncer circle
+                this.x=x;
+                this.y=y;
+                this.r=r;
+
+                this.dx=0;
+                this.dy=0;
+
+
+                this.id=null;
+                this.fillColor = "lightblue";
+
+                this.pressed=false;
+
+                //outer circle
+                this.X=this.x;
+                this.Y=this.y;
+                this.R=this.r+30;
+            }
+
+            joyStickDrawPath(){
+               
+                if(this.pressed){
+
+                    let activeX=this.X-this.x;
+                    let activeY=this.Y-this.y;
+                    
+                    let activeDist=Math.sqrt(activeX*activeX+activeY*activeY);
+                    
+                    this.dx=activeX/activeDist;
+                    this.dy=activeY/activeDist;
+                    
+                    if(activeDist>this.R){
+                        let offset = Math.abs(this.R-activeDist);//distnace from center of dynamic to fixed
+                        
+                        let offsetX=offset*this.dx;
+                        let offsetY=offset*this.dy;
+                        
+                        this.x += offsetX;
+                        this.y += offsetY;
+                        
+                    }
+                }else{
+                    this.x = this.X;
+                    this.y = this.Y;
+                }
+
+                //outer arc
+                ctx.beginPath();
+                ctx.arc(this.X,this.Y,this.R,0,Math.PI * 2);
+                ctx.stroke();
+                ctx.closePath();
+
+                ctx.beginPath();
+                //inner arc
+                ctx.save();
+                ctx.arc(this.x,this.y,this.r,startAngle,endAngle);
+                ctx.fillStyle = this.fillColor;
+                ctx.fill();
+                ctx.stroke();
+                ctx.closePath();
+                ctx.restore();
+
+            }
+
+            addEvent(){
+                canvas.addEventListener("touchstart", e=>{
+                    e.preventDefault();
+                    // this.id=e.touches[0].identifier;
+                    this.x=e.touches[0].clientX;
+                    this.y=e.touches[0].clientY;
+                    this.pressed=true;
+                })
+
+                canvas.addEventListener("touchmove", e=>{
+                    this.x=e.touches[0].clientX;
+                    this.y=e.touches[0].clientY;
+
+                })
+
+                canvas.addEventListener("touchend", e=>{
+                    // this.id=changedTouches[0].identifier;
+                    this.x=e.changedTouches[0].clientX;
+                    this.y=e.changedTouches[0].clientY;
+                    this.pressed=false;
+                })
+            }
+
+            drawText(){
+                ctx.font="20px Arial";
+                ctx.fillText("x: " + Math.round(this.dx),22,22);
+                ctx.fillText("y: " + Math.round(this.dy),22,44);
+                
+                ctx.fillText("pressed: " + this.pressed,22,64);
+
+                ctx.fillText("X: " + this.X,522,22);
+                ctx.fillText("Y: " + this.Y,522,44);
+
+            }
+
+        }
+
+        let joyStick = new JoyStick(250,250,100);
+        let player = new Player(500,1000,40);
+
+        function draw(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+
+            player.playerDrawPath();
+            player.playerMove();
+
+            joyStick.joyStickDrawPath();
+            joyStick.drawText();
+
+            window.requestAnimationFrame(draw);
+
+        }
+
+        joyStick.addEvent();
+        draw();
+        resize()
+    </script> -->
+</body>
+
+</html>
